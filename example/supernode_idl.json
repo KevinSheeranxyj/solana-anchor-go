@@ -82,6 +82,7 @@
         },
         {
           "name": "operator",
+          "writable": true,
           "signer": true
         },
         {
@@ -90,6 +91,10 @@
           "relations": [
             "supernode"
           ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
@@ -395,6 +400,70 @@
           "type": "u64"
         }
       ]
+    },
+    {
+      "name": "close_provider_stake_info",
+      "discriminator": [
+        114,
+        221,
+        217,
+        41,
+        130,
+        172,
+        86,
+        125
+      ],
+      "accounts": [
+        {
+          "name": "provider_stake_info",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  118,
+                  105,
+                  100,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101,
+                  95,
+                  105,
+                  110,
+                  102,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "provider"
+              }
+            ]
+          }
+        },
+        {
+          "name": "provider"
+        },
+        {
+          "name": "destination",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
     },
     {
       "name": "create_rental_pool",
@@ -784,6 +853,67 @@
       ]
     },
     {
+      "name": "initialize_provider",
+      "discriminator": [
+        181,
+        103,
+        225,
+        14,
+        214,
+        210,
+        161,
+        238
+      ],
+      "accounts": [
+        {
+          "name": "provider_stake_info",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  118,
+                  105,
+                  100,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101,
+                  95,
+                  105,
+                  110,
+                  102,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "provider"
+              }
+            ]
+          }
+        },
+        {
+          "name": "provider",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "pay_rental_fee",
       "discriminator": [
         45,
@@ -936,7 +1066,6 @@
       "accounts": [
         {
           "name": "provider_vesting_info",
-          "writable": true,
           "pda": {
             "seeds": [
               {
@@ -1011,9 +1140,7 @@
           "name": "provider"
         },
         {
-          "name": "controller",
-          "writable": true,
-          "signer": true
+          "name": "controller"
         },
         {
           "name": "token_program",
@@ -1184,13 +1311,11 @@
           "name": "provider"
         },
         {
-          "name": "controller",
-          "writable": true,
-          "signer": true
-        },
-        {
           "name": "admin",
-          "signer": true
+          "signer": true,
+          "relations": [
+            "supernode"
+          ]
         },
         {
           "name": "token_program",
@@ -1372,6 +1497,7 @@
         },
         {
           "name": "operator",
+          "writable": true,
           "signer": true
         },
         {
@@ -1386,6 +1512,10 @@
         },
         {
           "name": "new_controller"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
         }
       ],
       "args": []
@@ -2342,6 +2472,19 @@
       ]
     },
     {
+      "name": "ProviderStakeInfoInitializedEvent",
+      "discriminator": [
+        164,
+        38,
+        184,
+        38,
+        1,
+        97,
+        27,
+        152
+      ]
+    },
+    {
       "name": "RewardClaimedEvent",
       "discriminator": [
         246,
@@ -2680,6 +2823,22 @@
                 }
               }
             }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProviderStakeInfoInitializedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "provider",
+            "type": "pubkey"
+          },
+          {
+            "name": "operator",
+            "type": "pubkey"
           }
         ]
       }
