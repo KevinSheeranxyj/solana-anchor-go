@@ -78,6 +78,38 @@
           }
         },
         {
+          "name": "controller_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  116,
+                  114,
+                  111,
+                  108,
+                  108,
+                  101,
+                  114,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
           "name": "provider"
         },
         {
@@ -1052,6 +1084,146 @@
       ]
     },
     {
+      "name": "pay_rental_fees",
+      "discriminator": [
+        7,
+        111,
+        240,
+        71,
+        157,
+        15,
+        241,
+        107
+      ],
+      "accounts": [
+        {
+          "name": "supernode",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  117,
+                  112,
+                  101,
+                  114,
+                  110,
+                  111,
+                  100,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "supernode_rental_pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  117,
+                  112,
+                  101,
+                  114,
+                  110,
+                  111,
+                  100,
+                  101,
+                  95,
+                  114,
+                  101,
+                  110,
+                  116,
+                  97,
+                  108,
+                  95,
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "tenant_token_account",
+          "writable": true
+        },
+        {
+          "name": "tenant_info",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  101,
+                  110,
+                  97,
+                  110,
+                  116,
+                  95,
+                  105,
+                  110,
+                  102,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tenant"
+              }
+            ]
+          }
+        },
+        {
+          "name": "token",
+          "relations": [
+            "supernode"
+          ]
+        },
+        {
+          "name": "tenant",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "admin",
+          "signer": true,
+          "relations": [
+            "supernode"
+          ]
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        }
+      ],
+      "args": [
+        {
+          "name": "amounts",
+          "type": {
+            "vec": "u64"
+          }
+        }
+      ]
+    },
+    {
       "name": "releasable",
       "discriminator": [
         115,
@@ -1403,10 +1575,43 @@
           }
         },
         {
+          "name": "controller_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  116,
+                  114,
+                  111,
+                  108,
+                  108,
+                  101,
+                  114,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
           "name": "provider"
         },
         {
           "name": "operator",
+          "writable": true,
           "signer": true
         },
         {
@@ -1418,6 +1623,10 @@
         },
         {
           "name": "old_controller"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
         }
       ],
       "args": []
@@ -1488,6 +1697,38 @@
               {
                 "kind": "account",
                 "path": "provider"
+              }
+            ]
+          }
+        },
+        {
+          "name": "controller_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  116,
+                  114,
+                  111,
+                  108,
+                  108,
+                  101,
+                  114,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
               }
             ]
           }
@@ -2340,6 +2581,19 @@
   ],
   "accounts": [
     {
+      "name": "ControllerRegistry",
+      "discriminator": [
+        206,
+        98,
+        49,
+        141,
+        127,
+        49,
+        185,
+        67
+      ]
+    },
+    {
       "name": "ProviderStakeInfo",
       "discriminator": [
         200,
@@ -2623,6 +2877,11 @@
       "code": 6011,
       "name": "ArithmeticOverflow",
       "msg": "Arithmetic overflow occurred"
+    },
+    {
+      "code": 6012,
+      "name": "ControllerAlreadyExistGlobally",
+      "msg": "Controller already exists in another provider's list"
     }
   ],
   "types": [
@@ -2634,7 +2893,10 @@
           {
             "name": "new_controllers",
             "type": {
-              "vec": "pubkey"
+              "array": [
+                "pubkey",
+                3
+              ]
             }
           }
         ]
@@ -2656,6 +2918,40 @@
           {
             "name": "amount",
             "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ControllerAssignment",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "controller",
+            "type": "pubkey"
+          },
+          {
+            "name": "provider",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ControllerRegistry",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "controllers",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "ControllerAssignment"
+                }
+              }
+            }
           }
         ]
       }
