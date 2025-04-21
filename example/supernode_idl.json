@@ -1,5 +1,5 @@
 {
-  "address": "EYo8S9eVjkVexBz7Pd99WDgtxPtPpgYNezRGdtaAk6VQ",
+  "address": "GFrtgxwLte72hoxMUcPRQNftZVsHDpeyYDRPdeyF2Nfu",
   "metadata": {
     "name": "supernode",
     "version": "0.1.0",
@@ -246,13 +246,13 @@
           }
         },
         {
-          "name": "provider_token_account",
+          "name": "controller_token_account",
           "writable": true,
           "pda": {
             "seeds": [
               {
                 "kind": "account",
-                "path": "provider"
+                "path": "controller"
               },
               {
                 "kind": "const",
@@ -336,10 +336,7 @@
           }
         },
         {
-          "name": "token",
-          "relations": [
-            "supernode"
-          ]
+          "name": "token"
         },
         {
           "name": "provider"
@@ -352,10 +349,7 @@
         {
           "name": "admin",
           "writable": true,
-          "signer": true,
-          "relations": [
-            "supernode"
-          ]
+          "signer": true
         },
         {
           "name": "token_program",
@@ -483,13 +477,13 @@
           }
         },
         {
-          "name": "provider_token_account",
+          "name": "controller_token_account",
           "writable": true,
           "pda": {
             "seeds": [
               {
                 "kind": "account",
-                "path": "provider"
+                "path": "controller"
               },
               {
                 "kind": "const",
@@ -1399,6 +1393,98 @@
       ]
     },
     {
+      "name": "reinitialize_provider_stake_info",
+      "discriminator": [
+        49,
+        35,
+        96,
+        226,
+        78,
+        60,
+        184,
+        78
+      ],
+      "accounts": [
+        {
+          "name": "supernode",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  117,
+                  112,
+                  101,
+                  114,
+                  110,
+                  111,
+                  100,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "provider_stake_info",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  118,
+                  105,
+                  100,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101,
+                  95,
+                  105,
+                  110,
+                  102,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "provider"
+              }
+            ]
+          }
+        },
+        {
+          "name": "provider"
+        },
+        {
+          "name": "operator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "admin",
+          "signer": true,
+          "relations": [
+            "supernode"
+          ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "releasable",
       "discriminator": [
         115,
@@ -1935,6 +2021,319 @@
         }
       ],
       "args": []
+    },
+    {
+      "name": "replace_provider",
+      "discriminator": [
+        43,
+        45,
+        198,
+        130,
+        112,
+        80,
+        60,
+        130
+      ],
+      "accounts": [
+        {
+          "name": "supernode",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  117,
+                  112,
+                  101,
+                  114,
+                  110,
+                  111,
+                  100,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "old_provider_stake_info",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  118,
+                  105,
+                  100,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101,
+                  95,
+                  105,
+                  110,
+                  102,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "old_provider"
+              }
+            ]
+          }
+        },
+        {
+          "name": "new_provider_stake_info",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  118,
+                  105,
+                  100,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101,
+                  95,
+                  105,
+                  110,
+                  102,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "new_provider"
+              }
+            ]
+          }
+        },
+        {
+          "name": "controller_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  110,
+                  116,
+                  114,
+                  111,
+                  108,
+                  108,
+                  101,
+                  114,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "old_provider"
+        },
+        {
+          "name": "new_provider"
+        },
+        {
+          "name": "operator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "supernode"
+          ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "params",
+          "type": {
+            "defined": {
+              "name": "ReplaceProviderParams"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "replace_provider_vesting",
+      "discriminator": [
+        192,
+        28,
+        200,
+        102,
+        187,
+        131,
+        107,
+        72
+      ],
+      "accounts": [
+        {
+          "name": "supernode",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  117,
+                  112,
+                  101,
+                  114,
+                  110,
+                  111,
+                  100,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "old_provider_vesting_info",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  118,
+                  105,
+                  100,
+                  101,
+                  114,
+                  95,
+                  118,
+                  101,
+                  115,
+                  116,
+                  105,
+                  110,
+                  103,
+                  95,
+                  105,
+                  110,
+                  102,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "old_provider"
+              }
+            ]
+          }
+        },
+        {
+          "name": "new_provider_vesting_info",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  118,
+                  105,
+                  100,
+                  101,
+                  114,
+                  95,
+                  118,
+                  101,
+                  115,
+                  116,
+                  105,
+                  110,
+                  103,
+                  95,
+                  105,
+                  110,
+                  102,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "new_provider"
+              }
+            ]
+          }
+        },
+        {
+          "name": "old_provider"
+        },
+        {
+          "name": "new_provider"
+        },
+        {
+          "name": "admin",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "supernode"
+          ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "params",
+          "type": {
+            "defined": {
+              "name": "ReplaceProviderParams"
+            }
+          }
+        }
+      ]
     },
     {
       "name": "stake_device",
@@ -3060,6 +3459,19 @@
       ]
     },
     {
+      "name": "ProviderReplacedEvent",
+      "discriminator": [
+        68,
+        172,
+        16,
+        112,
+        75,
+        182,
+        89,
+        232
+      ]
+    },
+    {
       "name": "ProviderStakeInfoInitializedEvent",
       "discriminator": [
         164,
@@ -3070,6 +3482,19 @@
         97,
         27,
         152
+      ]
+    },
+    {
+      "name": "ProviderVestingReplacedEvent",
+      "discriminator": [
+        145,
+        94,
+        18,
+        57,
+        253,
+        206,
+        63,
+        17
       ]
     },
     {
@@ -3246,6 +3671,21 @@
       "code": 6018,
       "name": "ControllerRegistryMismatch",
       "msg": "Controller registry does not match extra_controllers"
+    },
+    {
+      "code": 6019,
+      "name": "ProviderNotUsed",
+      "msg": "Provider not in use"
+    },
+    {
+      "code": 6020,
+      "name": "ProviderStillUsed",
+      "msg": "Provider still used"
+    },
+    {
+      "code": 6021,
+      "name": "RegistryNotEmpty",
+      "msg": "Controller Registry not empty"
     }
   ],
   "types": [
@@ -3259,7 +3699,7 @@
             "type": {
               "array": [
                 "pubkey",
-                3
+                2
               ]
             }
           }
@@ -3298,6 +3738,10 @@
           {
             "name": "provider",
             "type": "pubkey"
+          },
+          {
+            "name": "provider_id",
+            "type": "u64"
           }
         ]
       }
@@ -3489,16 +3933,48 @@
       }
     },
     {
+      "name": "ProviderReplacedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "provider_id",
+            "type": "u64"
+          },
+          {
+            "name": "old_provider",
+            "type": "pubkey"
+          },
+          {
+            "name": "new_provider",
+            "type": "pubkey"
+          },
+          {
+            "name": "operator",
+            "type": "pubkey"
+          },
+          {
+            "name": "admin",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
       "name": "ProviderStakeInfo",
       "type": {
         "kind": "struct",
         "fields": [
           {
+            "name": "provider_id",
+            "type": "u64"
+          },
+          {
             "name": "extra_controllers",
             "type": {
               "array": [
                 "pubkey",
-                3
+                2
               ]
             }
           },
@@ -3562,12 +4038,48 @@
       }
     },
     {
+      "name": "ProviderVestingReplacedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "old_provider",
+            "type": "pubkey"
+          },
+          {
+            "name": "new_provider",
+            "type": "pubkey"
+          },
+          {
+            "name": "admin",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ReplaceProviderParams",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "new_provider",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
       "name": "RewardClaimedEvent",
       "type": {
         "kind": "struct",
         "fields": [
           {
             "name": "provider",
+            "type": "pubkey"
+          },
+          {
+            "name": "controller",
             "type": "pubkey"
           },
           {
